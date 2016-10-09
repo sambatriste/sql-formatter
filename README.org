@@ -1,17 +1,17 @@
 #+TITLE: SQL formatter
 
-* これは何？
+** これは何？
 
 SQL文のフォーマットを行います。
 標準入力から受け取ったSQL文をフォーマットして、標準出力に出力します。
 
-** 使用例
+*** 使用例
 #+BEGIN_SRC sh
 echo "SELECT * FROM HOGE WHERE HOGE.FUGA = :fuga" | java -jar target/sql-formatter-1.0.0-jar-with-dependencies.jar
 
 #+END_SRC
 
-** 出力結果
+*** 出力結果
 
 #+BEGIN_EXAMPLE
 
@@ -23,16 +23,16 @@ echo "SELECT * FROM HOGE WHERE HOGE.FUGA = :fuga" | java -jar target/sql-formatt
         HOGE.FUGA = :fuga
 #+END_EXAMPLE
 
-** 依存ライブラリ
+*** 依存ライブラリ
 
 Hibernateのorg.hibernate.engine.jdbc.internal.BasicFormatterImplを使用しています。
 
-** 参考URL
+*** 参考URL
 
 [[http://stackoverflow.com/questions/312552/looking-for-an-embeddable-sql-beautifier-or-reformatter][- Looking for an embeddable SQL beautifier or reformatter]]
 
 
-* Emacsとの連携
+** Emacsとの連携
 
 Emacsでは、リージョン内の内容を外部コマンドに渡して、その結果でバッファを書き換えることができます。
 これを利用してSQL文の整形をEmacs上で行います。

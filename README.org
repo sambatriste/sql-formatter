@@ -68,7 +68,6 @@ Emacsでは、リージョン内の内容を外部コマンドに渡して、そ
        ))))
 
 ;; キーバインド設定
-(add-hook 'sql-mode-hook
-          (lambda ()
-            (define-key sql-mode-map (kbd "C-S-f") 'my-format-sql)))
+(with-eval-after-load "sql"
+  (define-key sql-mode-map (kbd "C-S-f") 'my-format-sql))
 #+END_SRC

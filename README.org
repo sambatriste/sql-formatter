@@ -32,6 +32,10 @@ Hibernateのorg.hibernate.engine.jdbc.internal.BasicFormatterImplを使用して
 [[http://stackoverflow.com/questions/312552/looking-for-an-embeddable-sql-beautifier-or-reformatter][- Looking for an embeddable SQL beautifier or reformatter]]
 
 
+** バイナリ
+
+ビルドが面倒な場合は、binaryディレクトリ配下のjarをダウンロードしてください。
+
 ** Emacsとの連携
 
 Emacsでは、リージョン内の内容を外部コマンドに渡して、その結果でバッファを書き換えることができます。

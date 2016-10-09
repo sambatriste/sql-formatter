@@ -1,0 +1,70 @@
+#+TITLE: SQL formatter
+
+* これは何？
+
+SQL文のフォーマットを行います。
+標準入力から受け取ったSQL文をフォーマットして、標準出力に出力します。
+
+** 使用例
+#+BEGIN_SRC sh
+echo "SELECT * FROM HOGE WHERE HOGE.FUGA = :fuga" | java -jar target/sql-formatter-1.0.0-jar-with-dependencies.jar
+
+#+END_SRC
+
+** 出力結果
+
+#+BEGIN_EXAMPLE
+
+    SELECT
+        * 
+    FROM
+        HOGE 
+    WHERE
+        HOGE.FUGA = :fuga
+#+END_EXAMPLE
+
+** 依存ライブラリ
+
+Hibernateのorg.hibernate.engine.jdbc.internal.BasicFormatterImplを使用しています。
+
+** 参考URL
+
+[[http://stackoverflow.com/questions/312552/looking-for-an-embeddable-sql-beautifier-or-reformatter][- Looking for an embeddable SQL beautifier or reformatter]]
+
+
+* Emacsとの連携
+
+Emacsでは、リージョン内の内容を外部コマンドに渡して、その結果でバッファを書き換えることができます。
+これを利用してSQL文の整形をEmacs上で行います。
+
+#+BEGIN_SRC lisp
+;;; SQL文の整形をする設定
+;; 実行する外部コマンド
+(setq sql-format-external-command
+  (concat "java -jar " (expand-file-name "~/.emacs.d/lib/sql-formatter-1.0.0-jar-with-dependencies.jar")))
+
+;; SQL文をフォーマットする関数
+(defun my-format-sql ()
+  "バッファまたはリージョン内のSQL文を整形する。"
+  (interactive)
+  (let (begin end)
+    (cond (mark-active
+           (setq begin (region-beginning))
+           (setq end (region-end)))
+          (t
+           (setq begin (point-min))
+           (setq end (point-max))))
+    (save-excursion
+      (shell-command-on-region
+       begin
+       end
+       sql-format-external-command
+       nil 
+       t ; replace buffer
+       ))))
+
+;; キーバインド設定
+(add-hook 'sql-mode-hook
+          (lambda ()
+            (define-key sql-mode-map (kbd "C-S-f") 'my-format-sql)))
+#+END_SRC

@@ -1,6 +1,7 @@
 package com.github.sambatriste;
 
 import org.hibernate.engine.jdbc.internal.BasicFormatterImpl;
+import org.hibernate.engine.jdbc.internal.Formatter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +33,7 @@ public class SqlFormatter {
 
     public void format() throws IOException {
         String original = readSql();
-        String formatted = new BasicFormatterImpl().format(original);
+        String formatted = newFormatter().format(original);
         writer.write(formatted);
         writer.flush();
     }
@@ -45,5 +46,9 @@ public class SqlFormatter {
         }
         return sql.toString();
 
+    }
+
+    private Formatter newFormatter() {
+        return new CustomFormatter();
     }
 }

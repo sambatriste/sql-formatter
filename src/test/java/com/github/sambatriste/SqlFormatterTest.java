@@ -14,13 +14,13 @@ public class SqlFormatterTest {
     @Test
     public void test() throws IOException {
         String original = "SELECT * FROM HOGE WHERE HOGE.FUGA = :fuga";
-        String expected = "\n" +
-        "    SELECT\n" +
-        "        * \n" +
-        "    FROM\n" +
-        "        HOGE \n" +
-        "    WHERE\n" +
-        "        HOGE.FUGA = :fuga";
+        String expected =
+        "SELECT\n" +
+        "  * \n" +
+        "FROM\n" +
+        "  HOGE \n" +
+        "WHERE\n" +
+        "  HOGE.FUGA = :fuga";
         String formatted = format(original);
         assertThat(formatted, is(expected));
 

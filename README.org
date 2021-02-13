@@ -7,20 +7,19 @@ SQL文のフォーマットを行います。
 
 *** 使用例
 #+BEGIN_SRC sh
-echo "SELECT * FROM HOGE WHERE HOGE.FUGA = :fuga" | java -jar target/sql-formatter-1.0.0-jar-with-dependencies.jar
+echo "SELECT * FROM HOGE WHERE HOGE.FUGA = :fuga" | java -jar target/sql-formatter-1.0.1-jar-with-dependencies.jar
 
 #+END_SRC
 
 *** 出力結果
 
 #+BEGIN_EXAMPLE
-
-    SELECT
-        * 
-    FROM
-        HOGE 
-    WHERE
-        HOGE.FUGA = :fuga
+SELECT
+  * 
+FROM
+  HOGE 
+WHERE
+  HOGE.FUGA = :fuga
 #+END_EXAMPLE
 
 *** 依存ライブラリ
